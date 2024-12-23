@@ -1,27 +1,27 @@
 package com.bookingapp.models;
 
 public class Room {
-    private String Usuario;
+    private String type;
     private float price;
     private String description;
-    private boolean isAvalible;
+    private boolean isAvailable;
 
-    public Room(String usuario, float price, String description, boolean isAvalible) {
-        Usuario = usuario;
+    public Room(String type, float price, String description, boolean isAvailable) {
+        this.type = type;
         this.price = price;
         this.description = description;
-        this.isAvalible = isAvalible;
+        this.isAvailable = isAvailable;
     }
 
     public Room() {
     }
 
-    public String getUsuario() {
-        return Usuario;
+    public String getType() {
+        return type;
     }
 
-    public void setUsuario(String usuario) {
-        Usuario = usuario;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public float getPrice() {
@@ -40,11 +40,11 @@ public class Room {
         this.description = description;
     }
 
-    public boolean isAvalible() {
-        return isAvalible;
+    public boolean isAvailable() {
+        return isAvailable;
     }
 
-    public void setAvalible(boolean avalible) {
-        isAvalible = avalible;
+    public void setAvailable(boolean available) {
+        isAvailable = available;
     }
 }

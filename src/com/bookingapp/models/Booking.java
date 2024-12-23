@@ -5,21 +5,25 @@ import java.util.Date;
 public class Booking {
     private User user;
     private Hotel hotel;
+    private Room roomType;
     private Date checkIn;
     private Date checkout;
     private int adults;
     private int children;
+    private int roomamount;
     private float totalPrice;
     private float discount;
     private float increases;
 
-    public Booking(User user, Hotel hotel, Date checkIn, Date checkout, int adults, int children, float totalPrice, float discount, float increases) {
+    public Booking(User user, Hotel hotel, Room roomType, Date checkIn, Date checkout, int adults, int children, int roomamount, float totalPrice, float discount, float increases) {
         this.user = user;
         this.hotel = hotel;
+        this.roomType = roomType;
         this.checkIn = checkIn;
         this.checkout = checkout;
         this.adults = adults;
         this.children = children;
+        this.roomamount = roomamount;
         this.totalPrice = totalPrice;
         this.discount = discount;
         this.increases = increases;
@@ -42,6 +46,14 @@ public class Booking {
 
     public void setHotel(Hotel hotel) {
         this.hotel = hotel;
+    }
+
+    public Room getRoomType() {
+        return roomType;
+    }
+
+    public void setRoomType(Room roomType) {
+        this.roomType = roomType;
     }
 
     public Date getCheckIn() {
@@ -74,6 +86,14 @@ public class Booking {
 
     public void setChildren(int children) {
         this.children = children;
+    }
+
+    public int getRoomamount() {
+        return roomamount;
+    }
+
+    public void setRoomamount(int roomamount) {
+        this.roomamount = roomamount;
     }
 
     public float getTotalPrice() {
