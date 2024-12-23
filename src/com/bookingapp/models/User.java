@@ -9,18 +9,16 @@ public class User {
     private String email;
     private String nationality;
     private String phone;
-    private String arrivalTime;
     private Date birthday;
 
     // constructor
-    public User(int id, String firstName, String lastName, String email, String nationality, String phone,String arrivalTime, Date birthday) {
+    public User(int id, String firstName, String lastName, String email, String nationality, String phone, Date birthday) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.nationality = nationality;
         this.phone = phone;
-        this.arrivalTime = arrivalTime;
         this.birthday = birthday;
     }
 
@@ -74,14 +72,6 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public String getArrivalTime() {
-        return arrivalTime;
-    }
-
-    public void setArrivalTime(String arrivalTime) {
-        this.arrivalTime = arrivalTime;
     }
 
     public Date getBirthday() {
