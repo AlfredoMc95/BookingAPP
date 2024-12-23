@@ -3,7 +3,6 @@ package com.bookingapp.models;
 import java.util.Date;
 
 public class User {
-    private int id;
     private String firstName;
     private String lastName;
     private String email;
@@ -12,8 +11,7 @@ public class User {
     private Date birthday;
 
     // constructor
-    public User(int id, String firstName, String lastName, String email, String nationality, String phone, Date birthday) {
-        this.id = id;
+    public User( String firstName, String lastName, String email, String nationality, String phone, Date birthday) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -24,14 +22,6 @@ public class User {
 
     // esto es para crear un usuario sin data
     public User() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getFirstName() {
