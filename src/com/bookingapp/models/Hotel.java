@@ -20,4 +20,28 @@ public class Hotel extends AccomodationBase {
     public void setRooms(List<Room> rooms) {
         this.rooms = rooms;
     }
+    @Override
+    public double totalPriceSum(int quantityOfRooms, int checkIn){
+        Room room = getLowerPriceRoom();
+        double totalPrice = getPricePerNight() * quantityOfRooms * room.getPrice();
+        double discount = totalPriceDiscount(checkIn);
+        totalPrice = totalPrice + discount;
+        return totalPrice;
+    }
+
+    // busaca el cuarto mas barato y que este "valido" non este en uso ...
+    public Room getLowerPriceRoom(){
+        Room cheapestRoom = null;
+        double lowestPrice = Double.MAX_VALUE;
+
+        for (Room room : rooms) {
+            if (room.isAvailable() && room.getPrice() < lowestPrice) {
+                lowestPrice = room.getPrice();
+                cheapestRoom = room;
+            }
+        }
+
+        return cheapestRoom;
+    }
+
 }

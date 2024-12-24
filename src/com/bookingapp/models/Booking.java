@@ -71,6 +71,7 @@ public class Booking {
                     System.out.println("Precio por noche: $" + hotel.getPricePerNight());
                     System.out.println("Descuento/Recargo aplicado: $" + discount);
                     System.out.println("Precio total: $" + totalPrice);
+                    System.out.println("habitaciones: " + rooms);
                     System.out.println("------------------------");
                 } else if (result instanceof DayOfSun) {
                     DayOfSun dayOfSun = (DayOfSun) result;
@@ -90,6 +91,7 @@ public class Booking {
                     System.out.println("Precio por noche: $" + aparment.getPricePerNight());
                     System.out.println("Descuento/Recargo aplicado: $" + discount);
                     System.out.println("Precio total: $" + totalPrice);
+                    System.out.println("habitaciones: " + rooms);
                     System.out.println("------------------------");
                 }
             }

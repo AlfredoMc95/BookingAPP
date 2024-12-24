@@ -10,6 +10,7 @@ public class BookingApp {
         // Crear habitaciones para el primer hotel
         List<Room> hotelSolRooms = new ArrayList<>();
         hotelSolRooms.add(new Room("Simple", 100, "Habitación básica", true));
+        hotelSolRooms.add(new Room("Doble", 50, "Habitación para dos", true));
         hotelSolRooms.add(new Room("Doble", 150, "Habitación para dos", true));
 
         // Crear habitaciones para el segundo hotel
