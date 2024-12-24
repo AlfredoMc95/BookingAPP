@@ -2,14 +2,12 @@ package com.bookingapp.models;
 
 public class Activity {
     private String name;
-    private Boolean includesLunch;
-    private Boolean includesSnack;
+    private String description;
     private float price;
 
-    public Activity(String name, Boolean includesLunch, Boolean includesSnack, float price) {
+    public Activity(String name, String description, float price) {
         this.name = name;
-        this.includesLunch = includesLunch;
-        this.includesSnack = includesSnack;
+        this.description = description;
         this.price = price;
     }
 
@@ -24,20 +22,12 @@ public class Activity {
         this.name = name;
     }
 
-    public Boolean getIncludesLunch() {
-        return includesLunch;
+    public String getDescription() {
+        return description;
     }
 
-    public void setIncludesLunch(Boolean includesLunch) {
-        this.includesLunch = includesLunch;
-    }
-
-    public Boolean getIncludesSnack() {
-        return includesSnack;
-    }
-
-    public void setIncludesSnack(Boolean includesSnack) {
-        this.includesSnack = includesSnack;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public float getPrice() {
