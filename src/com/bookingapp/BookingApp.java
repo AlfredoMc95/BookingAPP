@@ -41,18 +41,6 @@ public class BookingApp {
         Booking booking = new Booking(accommodations, dayOfSunOptions);
 
         // Buscar alojamientos
-        List<Object> results = booking.findAccommodations("Bogota", "Apartamento", 10, 15, 2, 0, 1);
-
-        if (results.isEmpty()) {
-            System.out.println("No se encontraron resultados.");
-        } else {
-            for (Object result : results) {
-                if (result instanceof AccomodationBase) {
-                    ((AccomodationBase) result).showInfo();
-                } else if (result instanceof DayOfSun) {
-                    ((DayOfSun) result).showInfo();
-                }
-            }
-        }
+        booking.printResults("Medellín", "Hotel", 5, 10, 2, 1, 2);
     }
 }

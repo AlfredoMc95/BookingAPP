@@ -65,7 +65,7 @@ public class DayOfSun implements IAccommodation, IActivity {
 
     @Override
     public double totalPriceSum(int roomsQuantity, int checkIn, int checkOut) {
-        return 0;
+        return price;
     }
 
     @Override
