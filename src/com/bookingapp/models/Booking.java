@@ -62,8 +62,8 @@ public class Booking {
             for (Object result : results) {
                 if (result instanceof Hotel) {
                     Hotel hotel = (Hotel) result;
-                    double totalPrice = hotel.totalPriceSum(rooms, checkIn, checkOut);
-                    double discount = hotel.totalPriceDiscount(checkIn, checkOut);
+                    double totalPrice = hotel.totalPriceSum(rooms, checkIn);
+                    double discount = hotel.totalPriceDiscount(checkIn);
 
                     // Imprimir información del hotel
                     System.out.println("Nombre: " + hotel.getName());
@@ -77,12 +77,12 @@ public class Booking {
                     System.out.println("Nombre: " + dayOfSun.getName());
                     System.out.println("Actividades disponibles:");
                     dayOfSun.showActivity();
-                    System.out.println("Precio: $" + dayOfSun.totalPriceSum(rooms,checkIn,checkOut));
+                    System.out.println("Precio: $" + dayOfSun.totalPriceSum(rooms,checkIn));
                     System.out.println("------------------------");
                 }else if(result instanceof Aparment){
                     Aparment aparment = (Aparment) result;
-                    double totalPrice = aparment.totalPriceSum(rooms, checkIn, checkOut);
-                    double discount = aparment.totalPriceDiscount(checkIn, checkOut);
+                    double totalPrice = aparment.totalPriceSum(rooms, checkIn);
+                    double discount = aparment.totalPriceDiscount(checkIn);
 
                     // Imprimir información del hotel
                     System.out.println("Nombre: " + aparment.getName());
@@ -95,4 +95,7 @@ public class Booking {
             }
         }
     }
+
+
+
 }

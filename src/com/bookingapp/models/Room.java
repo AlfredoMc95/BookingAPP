@@ -6,6 +6,8 @@ public class Room {
     private String description;
     private boolean isAvailable;
 
+    //Suite,Junior suite,Gran suite,Individuales,Dobles
+
     public Room(String type, float price, String description, boolean isAvailable) {
         this.type = type;
         this.price = price;

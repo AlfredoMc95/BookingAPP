@@ -64,21 +64,8 @@ public class DayOfSun implements IAccommodation, IActivity {
     }
 
     @Override
-    public double totalPriceSum(int roomsQuantity, int checkIn, int checkOut) {
+    public double totalPriceSum(int roomsQuantity, int checkIn) {
         return price;
-    }
-
-    @Override
-    public void showInfo() {
-        System.out.println("nombre: "+ this.name);
-        System.out.println("precio: "+ this.price);
-        if(this.lunchIsInclude){
-            System.out.println("Almuerzo incluido");
-        }
-        else{
-            System.out.println("Almuerzo no incluido");
-        }
-        showActivity();
     }
 
     @Override
