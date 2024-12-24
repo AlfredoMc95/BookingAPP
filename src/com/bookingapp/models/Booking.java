@@ -62,7 +62,7 @@ public class Booking {
     }
 
     // reserva en hotel
-    public void makeReservation(String hotelName, int checkIn, int checkOut, int adults, int children, int rooms){
+    public void makeReservation(String hotelName, int checkIn, int checkOut, int adults, int children, int rooms, User userInfo){
         List<Object> results = findAccommodationsByName(hotelName, checkIn, checkOut, adults, children, rooms);
 
         if (results.isEmpty()) {
