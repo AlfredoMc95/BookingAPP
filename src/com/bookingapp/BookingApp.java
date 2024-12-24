@@ -1,5 +1,58 @@
 package com.bookingapp;
 
-public class BookingApp {
+import com.bookingapp.models.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
+public class BookingApp {
+    public static void main(String[] args) {
+        // Crear habitaciones para el primer hotel
+        List<Room> hotelSolRooms = new ArrayList<>();
+        hotelSolRooms.add(new Room("Simple", 100, "Habitación básica", true));
+        hotelSolRooms.add(new Room("Doble", 150, "Habitación para dos", true));
+
+        // Crear habitaciones para el segundo hotel
+        List<Room> hotelLunaRooms = new ArrayList<>();
+        hotelLunaRooms.add(new Room("Simple", 120, "Habitación estándar", true));
+        hotelLunaRooms.add(new Room("Suite", 300, "Habitación de lujo", true));
+
+        // Crear actividades
+        List<Activity> activities = new ArrayList<>();
+        activities.add(new Activity("Natación", "Disfruta de una piscina olímpica"));
+        activities.add(new Activity("Senderismo", "Explora senderos naturales"));
+
+        // Crear alojamientos
+        Hotel hotelSol = new Hotel("Hotel Sol", 4, 200, "Medellín", hotelSolRooms);
+        Hotel hotelLuna = new Hotel("Hotel Luna", 5, 250, "Medellín", hotelLunaRooms);
+        Aparment mazuren = new Aparment("mazuren",2,"Bogota",250);
+
+        DayOfSun dayOfSun = new DayOfSun("Parque Sol",50, activities,"Medellín", true);
+
+        List<AccomodationBase> accommodations = new ArrayList<>();
+        accommodations.add(hotelSol);
+        accommodations.add(hotelLuna);
+        accommodations.add(mazuren);
+
+        List<DayOfSun> dayOfSunOptions = new ArrayList<>();
+        dayOfSunOptions.add(dayOfSun);
+
+        // Sistema de reservas
+        Booking booking = new Booking(accommodations, dayOfSunOptions);
+
+        // Buscar alojamientos
+        List<Object> results = booking.findAccommodations("Bogota", "Apartamento", 10, 15, 2, 0, 1);
+
+        if (results.isEmpty()) {
+            System.out.println("No se encontraron resultados.");
+        } else {
+            for (Object result : results) {
+                if (result instanceof AccomodationBase) {
+                    ((AccomodationBase) result).showInfo();
+                } else if (result instanceof DayOfSun) {
+                    ((DayOfSun) result).showInfo();
+                }
+            }
+        }
+    }
 }
