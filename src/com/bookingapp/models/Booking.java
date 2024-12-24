@@ -14,6 +14,7 @@ public class Booking {
         this.dayOfSunOptions = dayOfSunOptions;
     }
 
+    // encuentra typo de establecimiento dia sol, hotel , apartametno y finca
     public List<Object> findAccommodations(String city, String type, int checkIn, int checkOut, int adults, int children, int rooms) {
         List<Object> results = new ArrayList<>();
 
@@ -39,18 +40,90 @@ public class Booking {
                 }
             }
         }
+        return results;
+    }
+
+    //encuentra SOLO HOTEL por nombre
+    public List<Object> findAccommodationsByName(String name, int checkIn, int checkOut, int adults, int children, int rooms) {
+        List<Object> results = new ArrayList<>();
+
+        for (AccomodationBase accommodation : accommodations) {
+            if (!accommodation.getName().equalsIgnoreCase(name)) continue;
+
+            if (accommodation instanceof Hotel) {
+                Hotel hotel = (Hotel) accommodation;
+                if (hasAvailableRooms(hotel, rooms)) {
+                    results.add(hotel);
+                }
+            }
+        }
 
         return results;
     }
 
-    private boolean hasAvailableRooms(Hotel hotel, int requiredRooms) {
-        int availableRooms = 0;
-        for (Room room : hotel.getRooms()) {
-            if (room.isAvailable()) {
-                availableRooms++;
+    // reserva en hotel
+    public void makeReservation(String hotelName, int checkIn, int checkOut, int adults, int children, int rooms){
+        List<Object> results = findAccommodationsByName(hotelName, checkIn, checkOut, adults, children, rooms);
+
+        if (results.isEmpty()) {
+            System.out.println("No se encontraron resultados.");
+        } else {
+            for (Object result : results) {
+                if (result instanceof Hotel) {
+                    Hotel hotel = (Hotel) result;
+                    double totalPrice = hotel.totalPriceSum(rooms, checkIn);
+
+                    Room cheapestRoom = null;
+                    for (Room room : hotel.getRooms()) {
+                        if (room.isAvailable() && (cheapestRoom == null || room.getPrice() < cheapestRoom.getPrice())) {
+                            cheapestRoom = room;
+                        }
+                    }
+
+                    if (cheapestRoom != null) {
+                        // Marcar no disponible
+                        cheapestRoom.setAvailable(false);
+                        System.out.println("Reserva confirmada:");
+                        System.out.println("Hotel: " + hotel.getName());
+                        System.out.println("Tipo de habitación: " + cheapestRoom.getType());
+                        System.out.println("Precio: $" + totalPrice);
+                        System.out.println("------------------------");
+                    } else {
+                        System.out.println("No hay habitaciones disponibles en el hotel: " + hotel.getName());
+                        System.out.println("------------------------");
+                    }
+                }
             }
         }
-        return availableRooms >= requiredRooms;
+    }
+
+    private List<Room> getAvailableRooms(Hotel hotel) {
+        List<Room> availableRooms = new ArrayList<>();
+        for (Room room : hotel.getRooms()) {
+            if (room.isAvailable()) {
+                availableRooms.add(room);
+            }
+        }
+        return availableRooms;
+    }
+
+    private boolean hasAvailableRooms(Hotel hotel, int requiredRooms) {
+        return getAvailableRooms(hotel).size() >= requiredRooms;
+    }
+
+    public void showRooms(String hotelName, int checkIn, int checkOut, int adults, int children, int rooms){
+        List<Object> results = findAccommodationsByName(hotelName, checkIn, checkOut, adults, children, rooms);
+        if (results.isEmpty()) {
+            System.out.println("No se encontraron resultados.");
+        } else {
+            for (Object result : results) {
+                if (result instanceof Hotel) {
+                    Hotel hotel = (Hotel) result;
+                    // Imprimir información del hotel
+                    hotel.showRooms();
+                }
+            }
+        }
     }
 
     public void printResults(String city, String type, int checkIn, int checkOut, int adults, int children, int rooms) {
@@ -71,6 +144,7 @@ public class Booking {
                     System.out.println("Precio por noche: $" + hotel.getPricePerNight());
                     System.out.println("Descuento/Recargo aplicado: $" + discount);
                     System.out.println("Precio total: $" + totalPrice);
+                    System.out.println("habitaciones: " + rooms);
                     System.out.println("------------------------");
                 } else if (result instanceof DayOfSun) {
                     DayOfSun dayOfSun = (DayOfSun) result;
@@ -90,6 +164,7 @@ public class Booking {
                     System.out.println("Precio por noche: $" + aparment.getPricePerNight());
                     System.out.println("Descuento/Recargo aplicado: $" + discount);
                     System.out.println("Precio total: $" + totalPrice);
+                    System.out.println("habitaciones: " + rooms);
                     System.out.println("------------------------");
                 }
             }

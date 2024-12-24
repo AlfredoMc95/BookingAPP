@@ -8,8 +8,11 @@ import java.util.List;
 public class BookingApp {
     public static void main(String[] args) {
         // Crear habitaciones para el primer hotel
+        // Suite,Junior suite,Gran suite,Individuales,Dobles
+
         List<Room> hotelSolRooms = new ArrayList<>();
         hotelSolRooms.add(new Room("Simple", 100, "Habitación básica", true));
+        hotelSolRooms.add(new Room("Doble", 50, "Habitación para dos", true));
         hotelSolRooms.add(new Room("Doble", 150, "Habitación para dos", true));
 
         // Crear habitaciones para el segundo hotel
@@ -42,5 +45,10 @@ public class BookingApp {
 
         // Buscar alojamientos
         booking.printResults("Medellín", "Hotel", 5, 10, 2, 1, 1);
+
+        booking.showRooms("Hotel luna",  5, 10, 2, 1, 1);
+
+        //booking.makeReservation("Hotel Sol",  5, 10, 2, 1, 1);
+
     }
 }

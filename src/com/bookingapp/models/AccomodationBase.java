@@ -1,18 +1,22 @@
 package com.bookingapp.models;
 
 import com.bookingapp.utilities.IAccommodation;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AccomodationBase implements IAccommodation {
     private String name;
     private int rate;
     private String city;
     private double pricePerNight;
+    private List<User> users;
 
     public AccomodationBase(String name, int rate,String city, double pricePerNight) {
         this.name = name;
         this.rate = rate;
         this.city = city;
         this.pricePerNight = pricePerNight;
+        this.users = new ArrayList<>();
     }
 
     public AccomodationBase() {
@@ -48,6 +52,15 @@ public class AccomodationBase implements IAccommodation {
 
     public void setPricePerNight(double pricePerNight) {
         this.pricePerNight = pricePerNight;
+    }
+
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void addUser(User user) {
+        this.users.add(user);
     }
 
     public double totalPriceSum(int quantityOfRooms, int checkIn){
