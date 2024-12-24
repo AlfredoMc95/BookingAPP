@@ -40,6 +40,9 @@ public class BookingApp {
         List<DayOfSun> dayOfSunOptions = new ArrayList<>();
         dayOfSunOptions.add(dayOfSun);
 
+        // user
+        User user = new User("Juan","martinez","Juan@gmail.com","Colombia","3058965412","02-10-1995");
+
         // Sistema de reservas
         Booking booking = new Booking(accommodations, dayOfSunOptions);
 
@@ -48,7 +51,7 @@ public class BookingApp {
 
         booking.showRooms("Hotel luna",  5, 10, 2, 1, 1);
 
-        //booking.makeReservation("Hotel Sol",  5, 10, 2, 1, 1);
+        booking.makeReservation("Hotel Sol",  5, 10, 2, 1, 1,user);
 
     }
 }
