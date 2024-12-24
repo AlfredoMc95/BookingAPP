@@ -41,6 +41,6 @@ public class BookingApp {
         Booking booking = new Booking(accommodations, dayOfSunOptions);
 
         // Buscar alojamientos
-        booking.printResults("Medellín", "Hotel", 5, 10, 2, 1, 2);
+        booking.printResults("Medellín", "Hotel", 5, 10, 2, 1, 1);
     }
 }

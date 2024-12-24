@@ -50,27 +50,19 @@ public class AccomodationBase implements IAccommodation {
         this.pricePerNight = pricePerNight;
     }
 
-    @Override
-    public void showInfo(){
-        System.out.println("nombre: " + this.name);
-        System.out.println("calificacion: " + this.rate);
-        System.out.println("Precio noche: " + this.pricePerNight);
-        System.out.println("-------------------------------------");
-    }
-
-    public double totalPriceSum(int quantityOfRooms, int checkIn, int checkOut){
-        double totalPrice = pricePerNight * quantityOfRooms * (checkIn-checkOut-1);
-        double discount = totalPriceDiscount(checkIn , checkOut);
-        totalPrice += discount;
+    public double totalPriceSum(int quantityOfRooms, int checkIn){
+        double totalPrice = pricePerNight * quantityOfRooms;
+        double discount = totalPriceDiscount(checkIn);
+        totalPrice = totalPrice + discount;
         return totalPrice;
     }
 
-    protected double totalPriceDiscount(int checkIn , int checkOut){
-        if (checkIn > 5 && checkOut <= 31) {
+    protected double totalPriceDiscount(int checkIn){
+        if (checkIn >= 25) {
             return (pricePerNight * 0.15);
-        } else if (checkIn >= 10 && checkOut <= 15) {
+        } else if (checkIn >= 10&& checkIn<25) {
             return (pricePerNight * 0.10);
-        } else if (checkIn >= 5 && checkIn < 10) {
+        } else if (checkIn >= 5&& checkIn<10) {
             return -(pricePerNight * 0.08);
         }
 
