@@ -52,4 +52,47 @@ public class Booking {
         }
         return availableRooms >= requiredRooms;
     }
+
+    public void printResults(String city, String type, int checkIn, int checkOut, int adults, int children, int rooms) {
+        List<Object> results = findAccommodations(city, type, checkIn, checkOut, adults, children, rooms);
+
+        if (results.isEmpty()) {
+            System.out.println("No se encontraron resultados.");
+        } else {
+            for (Object result : results) {
+                if (result instanceof Hotel) {
+                    Hotel hotel = (Hotel) result;
+                    double totalPrice = hotel.totalPriceSum(rooms, checkIn, checkOut);
+                    double discount = hotel.totalPriceDiscount(checkIn, checkOut);
+
+                    // Imprimir información del hotel
+                    System.out.println("Nombre: " + hotel.getName());
+                    System.out.println("Calificación: " + hotel.getRate());
+                    System.out.println("Precio por noche: $" + hotel.getPricePerNight());
+                    System.out.println("Descuento/Recargo aplicado: $" + discount);
+                    System.out.println("Precio total: $" + totalPrice);
+                    System.out.println("------------------------");
+                } else if (result instanceof DayOfSun) {
+                    DayOfSun dayOfSun = (DayOfSun) result;
+                    System.out.println("Nombre: " + dayOfSun.getName());
+                    System.out.println("Actividades disponibles:");
+                    dayOfSun.showActivity();
+                    System.out.println("Precio: $" + dayOfSun.totalPriceSum(rooms,checkIn,checkOut));
+                    System.out.println("------------------------");
+                }else if(result instanceof Aparment){
+                    Aparment aparment = (Aparment) result;
+                    double totalPrice = aparment.totalPriceSum(rooms, checkIn, checkOut);
+                    double discount = aparment.totalPriceDiscount(checkIn, checkOut);
+
+                    // Imprimir información del hotel
+                    System.out.println("Nombre: " + aparment.getName());
+                    System.out.println("Calificación: " + aparment.getRate());
+                    System.out.println("Precio por noche: $" + aparment.getPricePerNight());
+                    System.out.println("Descuento/Recargo aplicado: $" + discount);
+                    System.out.println("Precio total: $" + totalPrice);
+                    System.out.println("------------------------");
+                }
+            }
+        }
+    }
 }
