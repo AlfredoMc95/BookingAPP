@@ -44,4 +44,13 @@ public class Hotel extends AccomodationBase {
         return cheapestRoom;
     }
 
+    public void showRooms() {
+        System.out.println("curtos disponibles ");
+        for (Room room: rooms){
+            if(room.isAvailable()){
+                System.out.println("- typo: "+ room.getType() +". - descirpcion: "+room.getDescription()+". - Precio base: "+room.getPrice());
+            }
+        }
+    }
+
 }
