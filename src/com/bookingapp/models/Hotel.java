@@ -1,16 +1,18 @@
 package com.bookingapp.models;
 
-import java.util.Date;
 import java.util.List;
 
-public class Hotel extends Accommodation{
+public class Hotel {
+    private String name;
     private int rate;
+    private float pricePerNight;
     private List<Room> rooms;
     private List<Booking> booking;
 
-    public Hotel(String name, int rate, float price, List<Room> rooms, List<Booking> booking) {
-        super(name,price);
+    public Hotel(String name, int rate, float pricePerNight, List<Room> rooms, List<Booking> booking) {
+        this.name = name;
         this.rate = rate;
+        this.pricePerNight = pricePerNight;
         this.rooms = rooms;
         this.booking = booking;
     }
@@ -18,16 +20,12 @@ public class Hotel extends Accommodation{
     public Hotel() {
     }
 
-    //verificar cuartoos validos
-    @Override
-    public List<Room> CheckAvailability(Date checkIn, Date checkOut, int quantityOfRooms) {
-        return List.of();
+    public String getName() {
+        return name;
     }
 
-    //verificar precio
-    @Override
-    public double totalPrice(Date checkIn, Date checkOut, int quantityOfRooms) {
-        return 0;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getRate() {
@@ -36,6 +34,14 @@ public class Hotel extends Accommodation{
 
     public void setRate(int rate) {
         this.rate = rate;
+    }
+
+    public float getPricePerNight() {
+        return pricePerNight;
+    }
+
+    public void setPricePerNight(float pricePerNight) {
+        this.pricePerNight = pricePerNight;
     }
 
     public List<Room> getRooms() {

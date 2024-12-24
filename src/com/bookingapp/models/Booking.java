@@ -4,26 +4,26 @@ import java.util.Date;
 
 public class Booking {
     private User user;
-    private Accommodation accommodation;
+    private Hotel hotel;
     private Room roomType;
     private Date checkIn;
     private Date checkout;
     private int adults;
     private int children;
-    private int roomAmount;
+    private int roomamount;
     private float totalPrice;
     private float discount;
     private float increases;
 
-    public Booking(User user, Accommodation accommodation, Room roomType, Date checkIn, Date checkout, int adults, int children, int roomAmount, float totalPrice, float discount, float increases) {
+    public Booking(User user, Hotel hotel, Room roomType, Date checkIn, Date checkout, int adults, int children, int roomamount, float totalPrice, float discount, float increases) {
         this.user = user;
-        this.accommodation = accommodation;
+        this.hotel = hotel;
         this.roomType = roomType;
         this.checkIn = checkIn;
         this.checkout = checkout;
         this.adults = adults;
         this.children = children;
-        this.roomAmount = roomAmount;
+        this.roomamount = roomamount;
         this.totalPrice = totalPrice;
         this.discount = discount;
         this.increases = increases;
@@ -40,12 +40,12 @@ public class Booking {
         this.user = user;
     }
 
-    public Accommodation getAccommodation() {
-        return accommodation;
+    public Hotel getHotel() {
+        return hotel;
     }
 
-    public void setAccommodation(Accommodation accommodation) {
-        this.accommodation = accommodation;
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
     }
 
     public Room getRoomType() {
@@ -88,12 +88,12 @@ public class Booking {
         this.children = children;
     }
 
-    public int getRoomAmount() {
-        return roomAmount;
+    public int getRoomamount() {
+        return roomamount;
     }
 
-    public void setRoomAmount(int roomAmount) {
-        this.roomAmount = roomAmount;
+    public void setRoomamount(int roomamount) {
+        this.roomamount = roomamount;
     }
 
     public float getTotalPrice() {
