@@ -69,7 +69,7 @@ public class AccomodationBase implements IAccommodation {
         return totalPrice;
     }
 
-    protected double totalPriceDiscount(int checkIn){
+    public double totalPriceDiscount(int checkIn){
         if (checkIn >= 25) {
             return (pricePerNight * 0.15);
         } else if (checkIn >= 10&& checkIn<25) {

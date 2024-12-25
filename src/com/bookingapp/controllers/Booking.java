@@ -1,6 +1,6 @@
-package com.bookingapp.models;
+package com.bookingapp.controllers;
 
-import com.bookingapp.utilities.IAccommodation;
+import com.bookingapp.models.*;
 
 import java.util.ArrayList;
 import java.util.List;

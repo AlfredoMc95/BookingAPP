@@ -1,5 +1,6 @@
 package com.bookingapp;
 
+import com.bookingapp.controllers.Booking;
 import com.bookingapp.models.*;
 
 import java.util.ArrayList;
@@ -54,8 +55,8 @@ public class BookingApp {
         booking.findAccommodationsData();
         // buscar cuartos disponibles en el hotel
         booking.hotelshowRoomsData();
-        // no estooy seguro de que esto sea una buena practica
-        // hago reserva, pedira datos del hotel y creara un usuario con los datos que pedira del usuario despues
+        // no estoy seguro de que esto sea una buena práctica
+        // hago reserva, pedirá datos del hotel y creará un usuario con los datos que pedirá del usuario después
         booking.reservationData(null);
         // actualizo reserva
         booking.updateBookingData();
