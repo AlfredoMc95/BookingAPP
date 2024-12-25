@@ -45,12 +45,14 @@ public class Hotel extends AccomodationBase {
     }
 
     public void showRooms() {
-        System.out.println("curtos disponibles ");
+        long availableRooms = rooms.stream().filter(Room::isAvailable).count();
+        System.out.println("curtos disponibles: " + availableRooms);
         for (Room room: rooms){
             if(room.isAvailable()){
                 System.out.println("- typo: "+ room.getType() +". - descirpcion: "+room.getDescription()+". - Precio base: "+room.getPrice());
             }
         }
+        System.out.println("------------------------");
     }
 
 }
