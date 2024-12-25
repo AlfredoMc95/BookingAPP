@@ -59,5 +59,7 @@ public class BookingApp {
         booking.makeReservation("Hotel Sol",  5, 10, 2, 1, 1,user);
 
         booking.showRooms("Hotel sol",  5, 10, 2, 1, 1);
+
+        booking.updateBooking("Juan@gmail.com", "02-10-1995");
     }
 }

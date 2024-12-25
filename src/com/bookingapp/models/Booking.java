@@ -4,6 +4,7 @@ import com.bookingapp.utilities.IAccommodation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Booking {
     private List<AccomodationBase> accommodations;
@@ -87,7 +88,7 @@ public class Booking {
                         System.out.println("Tipo de habitación: " + cheapestRoom.getType());
                         System.out.println("descripcion: " + cheapestRoom.getDescription());
                         System.out.println("Precio: $" + totalPrice);
-                        BookingTicket bookingTicket = new BookingTicket(userInfo, cheapestRoom);
+                        BookingTicket bookingTicket = new BookingTicket(userInfo, cheapestRoom, totalPrice);
                         hotel.addBookingTicket(bookingTicket);
                         System.out.println("------------------------");
                     } else {
@@ -173,6 +174,86 @@ public class Booking {
         }
     }
 
+    // ticket se actualiza
+    public void updateBooking(String email, String birthdate) {
+        Scanner scanner = new Scanner(System.in);
+        BookingTicket ticketToUpdate = null;
+        Hotel hotelWithBooking = null;
 
+        for (AccomodationBase accommodation : accommodations) {
+            if (accommodation instanceof Hotel) {
+                Hotel hotel = (Hotel) accommodation;
+                for (BookingTicket ticket : hotel.getBookingTicket()) {
+                    if (ticket.getUser().getEmail().equalsIgnoreCase(email) &&
+                            ticket.getUser().getBirthdate().equalsIgnoreCase(birthdate)) {
+                        ticketToUpdate = ticket;
+                        hotelWithBooking = hotel;
+                        break;
+                    }
+                }
+            }
+            if (ticketToUpdate != null) break;
+        }
+
+        if (ticketToUpdate == null) {
+            System.out.println("No se encontró ninguna reserva.");
+            return;
+        }
+
+        User user = ticketToUpdate.getUser();
+        Room room = ticketToUpdate.getRoom();
+        double totalPrice = ticketToUpdate.getTotalPrice();
+        System.out.println("Reserva encontrada en el hotel: " + hotelWithBooking.getName());
+        System.out.println("Usuario: " + user.getFirstName() + " " + user.getLastName());
+        System.out.println("Correo: " + user.getEmail());
+        System.out.println("Teléfono: " + user.getPhone());
+        System.out.println("Habitación actual: " + room.getType() + " - $" + room.getPrice());
+        System.out.println("Habitación precio total: $" + totalPrice);
+        System.out.println("Descripción: " + room.getDescription());
+
+
+        System.out.println("¿Desea cambiar de habitación o alojamiento? (Room/Hotel)");
+        String response = scanner.nextLine();
+
+        if (response.equalsIgnoreCase("Room")) {
+            System.out.println("Ingrese el tipo de habitación deseada:");
+            String newRoomType = scanner.nextLine();
+
+            // Buscar una nueva habitación en el mismo hotel
+            Room newRoom = hotelWithBooking.getRooms().stream()
+                    .filter(r -> r.isAvailable() && r.getType().equalsIgnoreCase(newRoomType))
+                    .findFirst()
+                    .orElse(null);
+
+            if (newRoom != null) {
+                // Actualizar la reserva
+                newRoom.setAvailable(false);
+                room.setAvailable(true); // Liberar la habitación anterior
+                ticketToUpdate.setRoom(newRoom);
+                System.out.println("¡La reserva ha sido actualizada con éxito!");
+                System.out.println("Nueva habitación: " + newRoom.getType() + " - $" + newRoom.getPrice());
+            } else {
+                System.out.println("No se encontró una habitación disponible del tipo solicitado.");
+            }
+        } else if (response.equalsIgnoreCase("Hotel")) {
+            System.out.println("No.");
+        } else {
+            System.out.println("No se realizó ningún cambio en la reserva.");
+        }
+    }
+    /*
+    private Room findAvailableRoom(String roomType) {
+        for (AccomodationBase accommodation : accommodations) {
+            if (accommodation instanceof Hotel) {
+                Hotel hotel = (Hotel) accommodation;
+                for (Room room : hotel.getRooms()) {
+                    if (room.isAvailable() && room.getType().equalsIgnoreCase(roomType)) {
+                        return room;
+                    }
+                }
+            }
+        }
+        return null;
+    }*/
 
 }
