@@ -8,17 +8,22 @@ import java.util.List;
 public class BookingApp {
     public static void main(String[] args) {
         // Crear habitaciones para el primer hotel
-        // Suite,Junior suite,Gran suite,Individuales,Dobles
+        // Suite, Junior suite, Gran suite, Individuales, Dobles
 
         List<Room> hotelSolRooms = new ArrayList<>();
-        hotelSolRooms.add(new Room("Simple", 100, "Habitación básica", true));
-        hotelSolRooms.add(new Room("Doble", 50, "Habitación para dos", true));
-        hotelSolRooms.add(new Room("Doble", 150, "Habitación para dos", true));
+        hotelSolRooms.add(new Room("Suite", 300, "Amplia habitación con sala de estar, jacuzzi y vista panorámica", true));
+        hotelSolRooms.add(new Room("Junior Suite", 200, "Habitación cómoda con área de descanso y balcón privado", true));
+        hotelSolRooms.add(new Room("Doble", 150, "Habitación para dos personas con cama matrimonial y escritorio", true));
+        hotelSolRooms.add(new Room("Gran Suite", 400, "Habitación de lujo con dos dormitorios, sala privada y terraza", true));
+        hotelSolRooms.add(new Room("Individual", 100, "Habitación acogedora para una persona, incluye escritorio y TV", true));
+        hotelSolRooms.add(new Room("Gran Suite", 450, "Suite exclusiva con vistas espectaculares, cocina privada y baño de lujo", true));
 
         // Crear habitaciones para el segundo hotel
         List<Room> hotelLunaRooms = new ArrayList<>();
-        hotelLunaRooms.add(new Room("Simple", 120, "Habitación estándar", true));
-        hotelLunaRooms.add(new Room("Suite", 300, "Habitación de lujo", true));
+        hotelLunaRooms.add(new Room("Doble", 150, "Habitación para dos personas con cama matrimonial y escritorio", true));
+        hotelLunaRooms.add(new Room("Gran Suite", 400, "Habitación de lujo con dos dormitorios, sala privada y terraza", true));
+        hotelLunaRooms.add(new Room("Individual", 100, "Habitación acogedora para una persona, incluye escritorio y TV", true));
+        hotelLunaRooms.add(new Room("Gran Suite", 450, "Suite exclusiva con vistas espectaculares, cocina privada y baño de lujo", true));
 
         // Crear actividades
         List<Activity> activities = new ArrayList<>();
