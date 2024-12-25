@@ -197,6 +197,7 @@ public class Booking {
 
         if (ticketToUpdate == null) {
             System.out.println("No se encontró ninguna reserva.");
+            System.out.println("------------------------");
             return;
         }
 
@@ -210,50 +211,53 @@ public class Booking {
         System.out.println("Habitación actual: " + room.getType() + " - $" + room.getPrice());
         System.out.println("Habitación precio total: $" + totalPrice);
         System.out.println("Descripción: " + room.getDescription());
-
+        System.out.println("------------------------");
 
         System.out.println("¿Desea cambiar de habitación o alojamiento? (Room/Hotel)");
+        System.out.println("------------------------");
         String response = scanner.nextLine();
 
         if (response.equalsIgnoreCase("Room")) {
-            System.out.println("Ingrese el tipo de habitación deseada:");
-            String newRoomType = scanner.nextLine();
-
-            // Buscar una nueva habitación en el mismo hotel
-            Room newRoom = hotelWithBooking.getRooms().stream()
-                    .filter(r -> r.isAvailable() && r.getType().equalsIgnoreCase(newRoomType))
-                    .findFirst()
-                    .orElse(null);
-
-            if (newRoom != null) {
-                // Actualizar la reserva
-                newRoom.setAvailable(false);
-                room.setAvailable(true); // Liberar la habitación anterior
-                ticketToUpdate.setRoom(newRoom);
-                System.out.println("¡La reserva ha sido actualizada con éxito!");
-                System.out.println("Nueva habitación: " + newRoom.getType() + " - $" + newRoom.getPrice());
-            } else {
-                System.out.println("No se encontró una habitación disponible del tipo solicitado.");
-            }
+            updateRoom(ticketToUpdate, hotelWithBooking);
         } else if (response.equalsIgnoreCase("Hotel")) {
             System.out.println("No.");
         } else {
             System.out.println("No se realizó ningún cambio en la reserva.");
         }
     }
-    /*
-    private Room findAvailableRoom(String roomType) {
-        for (AccomodationBase accommodation : accommodations) {
-            if (accommodation instanceof Hotel) {
-                Hotel hotel = (Hotel) accommodation;
-                for (Room room : hotel.getRooms()) {
-                    if (room.isAvailable() && room.getType().equalsIgnoreCase(roomType)) {
-                        return room;
-                    }
-                }
-            }
+
+
+    private void updateRoom(BookingTicket ticketToUpdate, Hotel hotelWithBooking) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Habitaciones disponibles en el hotel " + hotelWithBooking.getName() + ":");
+        hotelWithBooking.showRooms();
+
+        System.out.println("Ingrese el tipo de habitación deseada:");
+        String newRoomType = scanner.nextLine();
+
+        // Buscar una nueva habitación en el mismo hotel
+        Room newRoom = hotelWithBooking.getRooms().stream()
+                .filter(r -> r.isAvailable() && r.getType().equalsIgnoreCase(newRoomType))
+                .findFirst()
+                .orElse(null);
+
+        if (newRoom != null) {
+            Room currentRoom = ticketToUpdate.getRoom();
+            newRoom.setAvailable(false);
+            currentRoom.setAvailable(true);
+            ticketToUpdate.setRoom(newRoom);
+            double totalPrice = ticketToUpdate.getTotalPrice();
+
+            System.out.println("¡La reserva ha sido actualizada con éxito!");
+            System.out.println("Nueva habitación: " + newRoom.getType() + " - $" + newRoom.getPrice());
+            System.out.println("Descripción: " + newRoom.getDescription());
+            System.out.println("Habitación precio total: $" + totalPrice);
+            System.out.println("------------------------");
+        } else {
+            System.out.println("No se encontró una habitación disponible del tipo solicitado.");
+            System.out.println("------------------------");
         }
-        return null;
-    }*/
+    }
 
 }
