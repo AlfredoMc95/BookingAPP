@@ -220,7 +220,7 @@ public class Booking {
         if (response.equalsIgnoreCase("Room")) {
             updateRoom(ticketToUpdate, hotelWithBooking);
         } else if (response.equalsIgnoreCase("Hotel")) {
-            System.out.println("No.");
+            updateHotel(ticketToUpdate, hotelWithBooking);
         } else {
             System.out.println("No se realizó ningún cambio en la reserva.");
         }
@@ -258,6 +258,30 @@ public class Booking {
             System.out.println("No se encontró una habitación disponible del tipo solicitado.");
             System.out.println("------------------------");
         }
+    }
+
+    private void updateHotel(BookingTicket ticketToUpdate, Hotel hotelWithBooking){
+        if (ticketToUpdate == null || hotelWithBooking == null) {
+            System.out.println("No se puede actualizar la reserva, datos inválidos.");
+            System.out.println("------------------------");
+            return;
+        }
+
+        System.out.println("Eliminando reserva actual...");
+        hotelWithBooking.getBookingTicket().remove(ticketToUpdate);
+
+        Room room = ticketToUpdate.getRoom();
+        if (room != null) {
+            room.setAvailable(true);
+        }
+
+        System.out.println("Reserva eliminada con éxito. Por favor, cree una nueva reserva.");
+
+        User user = ticketToUpdate.getUser();
+
+        // test
+        // REcordatorio cambiar esto (haria la reserva por defecto en este hotel harcodeado)
+        makeReservation("Hotel luna",  5, 10, 2, 1, 1,user);
     }
 
 }
