@@ -62,8 +62,122 @@ public class Booking {
         return results;
     }
 
+    // Recordatorio poner esto en otro Scrypt
+    public void findAccommodationsData() {
+        Scanner scanner = new Scanner(System.in);
+
+        String city;
+        String type;
+        int checkIn;
+        int checkOut;
+        int adults;
+        int children;
+        int rooms;
+
+        System.out.println("Ingrese nombre de la ciudad:");
+        city = scanner.nextLine();
+        System.out.println("Ingrese tipo de alojamiento:");
+        type = scanner.nextLine();
+        System.out.println("Ingrese dia de inicio:");
+        checkIn = scanner.nextInt();
+        System.out.println("Ingrese dia de fin:");
+        checkOut = scanner.nextInt();
+        System.out.println("Ingrese adultos:");
+        adults = scanner.nextInt();
+        System.out.println("Ingrese niños:");
+        children = scanner.nextInt();
+        System.out.println("Ingrese habitaciones:");
+        rooms = scanner.nextInt();
+
+        printResults(city, type, checkIn, checkOut, adults, children, rooms);
+    }
+
+    // Recordatorio poner esto en otro Scrypt
+    public void hotelshowRoomsData() {
+        Scanner scanner = new Scanner(System.in);
+        String hotelName;
+        int checkIn;
+        int checkOut;
+        int adults;
+        int children;
+        int rooms;
+
+        System.out.println("Ingrese nombre del hotel:");
+        hotelName = scanner.nextLine();
+        System.out.println("Ingrese dia de inicio:");
+        checkIn = scanner.nextInt();
+        System.out.println("Ingrese dia de fin:");
+        checkOut = scanner.nextInt();
+        System.out.println("Ingrese adultos:");
+        adults = scanner.nextInt();
+        System.out.println("Ingrese niños:");
+        children = scanner.nextInt();
+        System.out.println("Ingrese habitaciones:");
+        rooms = scanner.nextInt();
+
+        showRooms(hotelName,checkIn,checkOut,adults,children,rooms);
+    }
+
+    // Recordatorio poner esto en otro Scrypt
+    public void reservationData(User user){
+        Scanner scanner = new Scanner(System.in);
+        String hotelName;
+        int checkIn;
+        int checkOut;
+        int adults;
+        int children;
+        int rooms;
+
+        System.out.println("Ingrese nombre del hotel:");
+        hotelName = scanner.nextLine();
+        System.out.println("Ingrese dia de inicio:");
+        checkIn = scanner.nextInt();
+        System.out.println("Ingrese dia de fin:");
+        checkOut = scanner.nextInt();
+        System.out.println("Ingrese adultos:");
+        adults = scanner.nextInt();
+        System.out.println("Ingrese niños:");
+        children = scanner.nextInt();
+        System.out.println("Ingrese habitaciones:");
+        rooms = scanner.nextInt();
+        scanner.nextLine();
+
+        if(user == null) {
+            System.out.println("Ingrese nombre del usuario:");
+            String name = scanner.nextLine();
+            System.out.println("Ingrese apellido del usuario:");
+            String las = scanner.nextLine();
+            System.out.println("Ingrese email del usuario:");
+            String email = scanner.nextLine();
+            System.out.println("Ingrese nacionalidad del usuario:");
+            String nacionalidad = scanner.nextLine();
+            System.out.println("Ingrese telefono del usuario:");
+            String telefono = scanner.nextLine();
+            System.out.println("Ingrese fecha de nacimiento del usuario(dd-mm-aaaa):");
+            String fecha = scanner.nextLine();
+            User userInfo = new User(name,las,email,nacionalidad,telefono,fecha);
+            makeReservation(hotelName,checkIn,checkOut,adults,children,rooms,userInfo);
+        }else{
+            makeReservation(hotelName,checkIn,checkOut,adults,children,rooms,user);
+        }
+    }
+
+    public void updateBookingData()
+    {
+        Scanner scanner = new Scanner(System.in);
+        String email;
+        String birthdate;
+
+        System.out.println("Ingrese email:");
+        email = scanner.nextLine();
+        System.out.println("Ingrese fecha de nacimiento:");
+        birthdate = scanner.nextLine();
+
+        updateBooking( email, birthdate);
+    }
+
     // reserva en hotel
-    public void makeReservation(String hotelName, int checkIn, int checkOut, int adults, int children, int rooms, User userInfo){
+    private void makeReservation(String hotelName, int checkIn, int checkOut, int adults, int children, int rooms, User userInfo){
         List<Object> results = findAccommodationsByName(hotelName, checkIn, checkOut, adults, children, rooms);
 
         if (results.isEmpty()) {
@@ -83,8 +197,9 @@ public class Booking {
 
                     if (cheapestRoom != null) {
                         cheapestRoom.setAvailable(false);
-                        System.out.println("Reserva confirmada:");
+                        System.out.println("Reserva confirmada");
                         System.out.println("Hotel: " + hotel.getName());
+                        System.out.println("Usuario: " + userInfo.getFirstName() + " " + userInfo.getLastName());
                         System.out.println("Tipo de habitación: " + cheapestRoom.getType());
                         System.out.println("descripcion: " + cheapestRoom.getDescription());
                         System.out.println("Precio: $" + totalPrice);
@@ -276,12 +391,10 @@ public class Booking {
         }
 
         System.out.println("Reserva eliminada con éxito. Por favor, cree una nueva reserva.");
-
+        System.out.println("------------------------");
         User user = ticketToUpdate.getUser();
 
-        // test
-        // REcordatorio cambiar esto (haria la reserva por defecto en este hotel harcodeado)
-        makeReservation("Hotel luna",  5, 10, 2, 1, 1,user);
+        reservationData(user);
     }
 
 }
