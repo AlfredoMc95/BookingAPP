@@ -45,21 +45,20 @@ public class BookingApp {
         List<DayOfSun> dayOfSunOptions = new ArrayList<>();
         dayOfSunOptions.add(dayOfSun);
 
-        // user
-        User user = new User("Juan","martinez","Juan@gmail.com","Colombia","3058965412","02-10-1995");
-
         // Sistema de reservas
         Booking booking = new Booking(accommodations, dayOfSunOptions);
 
+
+        // Recordatorio poner esto en otro Scrypt
         // Buscar alojamientos
-        booking.printResults("Medellín", "Hotel", 5, 10, 2, 1, 1);
+        booking.findAccommodationsData();
+        // buscar cuartos disponibles en el hotel
+        booking.hotelshowRoomsData();
+        // no estooy seguro de que esto sea una buena practica
+        // hago reserva, pedira datos del hotel y creara un usuario con los datos que pedira del usuario despues
+        booking.reservationData(null);
+        // actualizo reserva
+        booking.updateBookingData();
 
-        booking.showRooms("Hotel sol",  5, 10, 2, 1, 1);
-
-        booking.makeReservation("Hotel Sol",  5, 10, 2, 1, 1,user);
-
-        booking.showRooms("Hotel sol",  5, 10, 2, 1, 1);
-
-        booking.updateBooking("Juan@gmail.com", "02-10-1995");
     }
 }
