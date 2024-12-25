@@ -3,10 +3,12 @@ package com.bookingapp.models;
 public class BookingTicket {
     private User user;
     private Room room;
+    private double totalPrice;
 
-    public BookingTicket(User user, Room room) {
+    public BookingTicket(User user, Room room, double totalPrice) {
         this.user = user;
         this.room = room;
+        this.totalPrice = totalPrice;
     }
 
     public BookingTicket() {
@@ -26,5 +28,13 @@ public class BookingTicket {
 
     public void setRoom(Room room) {
         this.room = room;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }
