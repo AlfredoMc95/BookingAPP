@@ -14,7 +14,7 @@ public class Booking {
         this.dayOfSunOptions = dayOfSunOptions;
     }
 
-    // encuentra typo de establecimiento dia sol, hotel , apartametno y finca
+    // encuentra typo de establecimiento día sol, hotel, apartamento y finca
     public List<Object> findAccommodations(String city, String type, int checkIn, int checkOut, int adults, int children, int rooms) {
         List<Object> results = new ArrayList<>();
 
@@ -81,12 +81,14 @@ public class Booking {
                     }
 
                     if (cheapestRoom != null) {
-                        // Marcar no disponible
                         cheapestRoom.setAvailable(false);
                         System.out.println("Reserva confirmada:");
                         System.out.println("Hotel: " + hotel.getName());
                         System.out.println("Tipo de habitación: " + cheapestRoom.getType());
+                        System.out.println("descripcion: " + cheapestRoom.getDescription());
                         System.out.println("Precio: $" + totalPrice);
+                        BookingTicket bookingTicket = new BookingTicket(userInfo, cheapestRoom);
+                        hotel.addBookingTicket(bookingTicket);
                         System.out.println("------------------------");
                     } else {
                         System.out.println("No hay habitaciones disponibles en el hotel: " + hotel.getName());

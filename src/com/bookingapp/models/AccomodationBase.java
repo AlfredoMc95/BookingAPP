@@ -9,14 +9,14 @@ public class AccomodationBase implements IAccommodation {
     private int rate;
     private String city;
     private double pricePerNight;
-    private List<User> users;
+    private List<BookingTicket> bookingTicket;
 
     public AccomodationBase(String name, int rate,String city, double pricePerNight) {
         this.name = name;
         this.rate = rate;
         this.city = city;
         this.pricePerNight = pricePerNight;
-        this.users = new ArrayList<>();
+        this.bookingTicket = new ArrayList<>();
     }
 
     public AccomodationBase() {
@@ -54,13 +54,12 @@ public class AccomodationBase implements IAccommodation {
         this.pricePerNight = pricePerNight;
     }
 
-
-    public List<User> getUsers() {
-        return users;
+    public List<BookingTicket> getBookingTicket() {
+        return bookingTicket;
     }
 
-    public void addUser(User user) {
-        this.users.add(user);
+    public void addBookingTicket(BookingTicket bookingTicket) {
+        this.bookingTicket.add(bookingTicket);
     }
 
     public double totalPriceSum(int quantityOfRooms, int checkIn){

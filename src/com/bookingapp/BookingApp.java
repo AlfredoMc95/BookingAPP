@@ -49,9 +49,10 @@ public class BookingApp {
         // Buscar alojamientos
         booking.printResults("Medellín", "Hotel", 5, 10, 2, 1, 1);
 
-        booking.showRooms("Hotel luna",  5, 10, 2, 1, 1);
+        booking.showRooms("Hotel sol",  5, 10, 2, 1, 1);
 
         booking.makeReservation("Hotel Sol",  5, 10, 2, 1, 1,user);
 
+        booking.showRooms("Hotel sol",  5, 10, 2, 1, 1);
     }
 }
