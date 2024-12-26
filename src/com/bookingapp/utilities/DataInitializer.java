@@ -11,7 +11,6 @@ public class DataInitializer {
         hotelSolRooms.add(new Room("Suite", 300, "Amplia habitación con sala de estar, jacuzzi y vista panorámica", true));
         hotelSolRooms.add(new Room("Junior Suite", 200, "Habitación cómoda con área de descanso y balcón privado", true));
         hotelSolRooms.add(new Room("Doble", 150, "Habitación para dos personas con cama matrimonial y escritorio", true));
-        hotelSolRooms.add(new Room("Gran Suite", 400, "Habitación de lujo con dos dormitorios, sala privada y terraza", true));
         hotelSolRooms.add(new Room("Individual", 100, "Habitación acogedora para una persona, incluye escritorio y TV", true));
         hotelSolRooms.add(new Room("Gran Suite", 450, "Suite exclusiva con vistas espectaculares, cocina privada y baño de lujo", true));
 
@@ -27,7 +26,7 @@ public class DataInitializer {
         Hotel hotelLuna = new Hotel("Hotel Luna", 5, 250, "Medellín", hotelLunaRooms);
 
         // Crear apartamentos
-        Aparment mazuren = new Aparment("mazuren", 2, "Bogota", 250);
+        Aparment mazuren = new Aparment("Mazuren", 2, "Bogota", 250);
 
         // Crear lista de alojamientos
         List<AccomodationBase> accommodations = new ArrayList<>();
