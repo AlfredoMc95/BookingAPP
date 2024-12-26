@@ -20,6 +20,7 @@ public class Hotel extends AccomodationBase {
     public void setRooms(List<Room> rooms) {
         this.rooms = rooms;
     }
+
     @Override
     public double totalPriceSum(int quantityOfRooms, int checkIn){
         Room room = getLowerPriceRoom();
