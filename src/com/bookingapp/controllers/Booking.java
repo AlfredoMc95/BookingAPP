@@ -1,14 +1,15 @@
 package com.bookingapp.controllers;
 
 import com.bookingapp.models.*;
+import com.bookingapp.views.ReservationData;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Booking {
-    private List<AccomodationBase> accommodations;
-    private List<DayOfSun> dayOfSunOptions;
+    public static List<AccomodationBase> accommodations = new ArrayList<>();
+    public static List<DayOfSun> dayOfSunOptions  = new ArrayList<>();
 
     public Booking(List<AccomodationBase> accommodations, List<DayOfSun> dayOfSunOptions) {
         this.accommodations = accommodations;
@@ -16,7 +17,7 @@ public class Booking {
     }
 
     // encuentra typo de establecimiento día sol, hotel, apartamento y finca
-    public List<Object> findAccommodations(String city, String type, int checkIn, int checkOut, int adults, int children, int rooms) {
+    public static List<Object> findAccommodations(String city, String type, int checkIn, int checkOut, int adults, int children, int rooms) {
         List<Object> results = new ArrayList<>();
 
         if (type.equalsIgnoreCase("Dia de sol")) {
@@ -45,7 +46,7 @@ public class Booking {
     }
 
     //encuentra SOLO HOTEL por nombre
-    public List<Object> findAccommodationsByName(String name, int checkIn, int checkOut, int adults, int children, int rooms) {
+    public static List<Object> findAccommodationsByName(String name, int checkIn, int checkOut, int adults, int children, int rooms) {
         List<Object> results = new ArrayList<>();
 
         for (AccomodationBase accommodation : accommodations) {
@@ -62,122 +63,8 @@ public class Booking {
         return results;
     }
 
-    // Recordatorio poner esto en otro Scrypt
-    public void findAccommodationsData() {
-        Scanner scanner = new Scanner(System.in);
-
-        String city;
-        String type;
-        int checkIn;
-        int checkOut;
-        int adults;
-        int children;
-        int rooms;
-
-        System.out.println("Ingrese nombre de la ciudad:");
-        city = scanner.nextLine();
-        System.out.println("Ingrese tipo de alojamiento:");
-        type = scanner.nextLine();
-        System.out.println("Ingrese dia de inicio:");
-        checkIn = scanner.nextInt();
-        System.out.println("Ingrese dia de fin:");
-        checkOut = scanner.nextInt();
-        System.out.println("Ingrese adultos:");
-        adults = scanner.nextInt();
-        System.out.println("Ingrese niños:");
-        children = scanner.nextInt();
-        System.out.println("Ingrese habitaciones:");
-        rooms = scanner.nextInt();
-
-        printResults(city, type, checkIn, checkOut, adults, children, rooms);
-    }
-
-    // Recordatorio poner esto en otro Scrypt
-    public void hotelshowRoomsData() {
-        Scanner scanner = new Scanner(System.in);
-        String hotelName;
-        int checkIn;
-        int checkOut;
-        int adults;
-        int children;
-        int rooms;
-
-        System.out.println("Ingrese nombre del hotel:");
-        hotelName = scanner.nextLine();
-        System.out.println("Ingrese dia de inicio:");
-        checkIn = scanner.nextInt();
-        System.out.println("Ingrese dia de fin:");
-        checkOut = scanner.nextInt();
-        System.out.println("Ingrese adultos:");
-        adults = scanner.nextInt();
-        System.out.println("Ingrese niños:");
-        children = scanner.nextInt();
-        System.out.println("Ingrese habitaciones:");
-        rooms = scanner.nextInt();
-
-        showRooms(hotelName,checkIn,checkOut,adults,children,rooms);
-    }
-
-    // Recordatorio poner esto en otro Scrypt
-    public void reservationData(User user){
-        Scanner scanner = new Scanner(System.in);
-        String hotelName;
-        int checkIn;
-        int checkOut;
-        int adults;
-        int children;
-        int rooms;
-
-        System.out.println("Ingrese nombre del hotel:");
-        hotelName = scanner.nextLine();
-        System.out.println("Ingrese dia de inicio:");
-        checkIn = scanner.nextInt();
-        System.out.println("Ingrese dia de fin:");
-        checkOut = scanner.nextInt();
-        System.out.println("Ingrese adultos:");
-        adults = scanner.nextInt();
-        System.out.println("Ingrese niños:");
-        children = scanner.nextInt();
-        System.out.println("Ingrese habitaciones:");
-        rooms = scanner.nextInt();
-        scanner.nextLine();
-
-        if(user == null) {
-            System.out.println("Ingrese nombre del usuario:");
-            String name = scanner.nextLine();
-            System.out.println("Ingrese apellido del usuario:");
-            String las = scanner.nextLine();
-            System.out.println("Ingrese email del usuario:");
-            String email = scanner.nextLine();
-            System.out.println("Ingrese nacionalidad del usuario:");
-            String nacionalidad = scanner.nextLine();
-            System.out.println("Ingrese telefono del usuario:");
-            String telefono = scanner.nextLine();
-            System.out.println("Ingrese fecha de nacimiento del usuario(dd-mm-aaaa):");
-            String fecha = scanner.nextLine();
-            User userInfo = new User(name,las,email,nacionalidad,telefono,fecha);
-            makeReservation(hotelName,checkIn,checkOut,adults,children,rooms,userInfo);
-        }else{
-            makeReservation(hotelName,checkIn,checkOut,adults,children,rooms,user);
-        }
-    }
-
-    public void updateBookingData()
-    {
-        Scanner scanner = new Scanner(System.in);
-        String email;
-        String birthdate;
-
-        System.out.println("Ingrese email:");
-        email = scanner.nextLine();
-        System.out.println("Ingrese fecha de nacimiento:");
-        birthdate = scanner.nextLine();
-
-        updateBooking( email, birthdate);
-    }
-
     // reserva en hotel
-    private void makeReservation(String hotelName, int checkIn, int checkOut, int adults, int children, int rooms, User userInfo){
+    public static void makeReservation(String hotelName, int checkIn, int checkOut, int adults, int children, int rooms, User userInfo){
         List<Object> results = findAccommodationsByName(hotelName, checkIn, checkOut, adults, children, rooms);
 
         if (results.isEmpty()) {
@@ -201,7 +88,7 @@ public class Booking {
                         System.out.println("Hotel: " + hotel.getName());
                         System.out.println("Usuario: " + userInfo.getFirstName() + " " + userInfo.getLastName());
                         System.out.println("Tipo de habitación: " + cheapestRoom.getType());
-                        System.out.println("descripcion: " + cheapestRoom.getDescription());
+                        System.out.println("Descripcion: " + cheapestRoom.getDescription());
                         System.out.println("Precio: $" + totalPrice);
                         BookingTicket bookingTicket = new BookingTicket(userInfo, cheapestRoom, totalPrice);
                         hotel.addBookingTicket(bookingTicket);
@@ -215,7 +102,7 @@ public class Booking {
         }
     }
 
-    private List<Room> getAvailableRooms(Hotel hotel) {
+    private static List<Room> getAvailableRooms(Hotel hotel) {
         List<Room> availableRooms = new ArrayList<>();
         for (Room room : hotel.getRooms()) {
             if (room.isAvailable()) {
@@ -225,34 +112,31 @@ public class Booking {
         return availableRooms;
     }
 
-    private boolean hasAvailableRooms(Hotel hotel, int requiredRooms) {
+    private static boolean hasAvailableRooms(Hotel hotel, int requiredRooms) {
         return getAvailableRooms(hotel).size() >= requiredRooms;
     }
 
-    public void showRooms(String hotelName, int checkIn, int checkOut, int adults, int children, int rooms){
+    public static void showRooms(String hotelName, int checkIn, int checkOut, int adults, int children, int rooms){
         List<Object> results = findAccommodationsByName(hotelName, checkIn, checkOut, adults, children, rooms);
         if (results.isEmpty()) {
             System.out.println("No se encontraron resultados.");
         } else {
             for (Object result : results) {
-                if (result instanceof Hotel) {
-                    Hotel hotel = (Hotel) result;
-                    // Imprimir información del hotel
+                if (result instanceof Hotel hotel) {
                     hotel.showRooms();
                 }
             }
         }
     }
 
-    public void printResults(String city, String type, int checkIn, int checkOut, int adults, int children, int rooms) {
+    public static void printResults(String city, String type, int checkIn, int checkOut, int adults, int children, int rooms) {
         List<Object> results = findAccommodations(city, type, checkIn, checkOut, adults, children, rooms);
 
         if (results.isEmpty()) {
             System.out.println("No se encontraron resultados.");
         } else {
             for (Object result : results) {
-                if (result instanceof Hotel) {
-                    Hotel hotel = (Hotel) result;
+                if (result instanceof Hotel hotel) {
                     double totalPrice = hotel.totalPriceSum(rooms, checkIn);
                     double discount = hotel.totalPriceDiscount(checkIn);
 
@@ -290,7 +174,7 @@ public class Booking {
     }
 
     // ticket se actualiza
-    public void updateBooking(String email, String birthdate) {
+    public static void updateBooking(String email, String birthdate) {
         Scanner scanner = new Scanner(System.in);
         BookingTicket ticketToUpdate = null;
         Hotel hotelWithBooking = null;
@@ -341,8 +225,7 @@ public class Booking {
         }
     }
 
-
-    private void updateRoom(BookingTicket ticketToUpdate, Hotel hotelWithBooking) {
+    private static void updateRoom(BookingTicket ticketToUpdate, Hotel hotelWithBooking) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Habitaciones disponibles en el hotel " + hotelWithBooking.getName() + ":");
@@ -375,7 +258,7 @@ public class Booking {
         }
     }
 
-    private void updateHotel(BookingTicket ticketToUpdate, Hotel hotelWithBooking){
+    private static void updateHotel(BookingTicket ticketToUpdate, Hotel hotelWithBooking){
         if (ticketToUpdate == null || hotelWithBooking == null) {
             System.out.println("No se puede actualizar la reserva, datos inválidos.");
             System.out.println("------------------------");
@@ -394,7 +277,6 @@ public class Booking {
         System.out.println("------------------------");
         User user = ticketToUpdate.getUser();
 
-        reservationData(user);
+        ReservationData.reservationData(user);
     }
-
 }
