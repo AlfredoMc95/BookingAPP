@@ -70,7 +70,6 @@ public class DayOfSun implements IAccommodation, IActivity {
 
     @Override
     public void showActivity() {
-        System.out.println("Actividades disponibles ");
         for (Activity activity: activities){
             System.out.println("- "+ activity.getName() +":"+activity.getDescription());
         }
