@@ -4,14 +4,14 @@ import com.bookingapp.utilities.IAccommodation;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AccomodationBase implements IAccommodation {
+public class AccommodationBase implements IAccommodation {
     private String name;
-    private int rate;
+    private Integer rate;
     private String city;
-    private double pricePerNight;
+    private Double pricePerNight;
     private List<BookingTicket> bookingTicket;
 
-    public AccomodationBase(String name, int rate,String city, double pricePerNight) {
+    public AccommodationBase(String name, Integer rate, String city, double pricePerNight) {
         this.name = name;
         this.rate = rate;
         this.city = city;
@@ -19,7 +19,7 @@ public class AccomodationBase implements IAccommodation {
         this.bookingTicket = new ArrayList<>();
     }
 
-    public AccomodationBase() {
+    public AccommodationBase() {
     }
 
     public String getName() {
@@ -62,22 +62,33 @@ public class AccomodationBase implements IAccommodation {
         this.bookingTicket.add(bookingTicket);
     }
 
-    public double totalPriceSum(int quantityOfRooms, int checkIn){
-        double totalPrice = pricePerNight * quantityOfRooms;
+    public double calculateTotalPrice(int quantityOfRooms, int checkIn){
+        double totalPrice = this.pricePerNight * quantityOfRooms;
         double discount = totalPriceDiscount(checkIn);
         totalPrice = totalPrice + discount;
         return totalPrice;
     }
 
-    public double totalPriceDiscount(int checkIn){
-        if (checkIn >= 25) {
-            return (pricePerNight * 0.15);
-        } else if (checkIn >= 10&& checkIn<25) {
-            return (pricePerNight * 0.10);
-        } else if (checkIn >= 5&& checkIn<10) {
-            return -(pricePerNight * 0.08);
-        }
+    /*
+    public double totalPriceDiscount(int checkIn) {
+        double discount = 0;
+        if (checkIn >= 25) discount = 0.15;
+        else if (checkIn >= 10) discount = 0.10;
+        else if (checkIn >= 5) discount = -0.08;
 
-        return 0;
+        return this.pricePerNight * discount;
     }
+    */
+
+    public double totalPriceDiscount(int checkIn) {
+        double discount;
+        switch (checkIn) {
+            case 25, 26, 27, 28, 29, 30 -> discount = 0.15;
+            case 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 -> discount = 0.10;
+            case 5, 6, 7, 8, 9 -> discount = -0.08;
+            default -> discount = 0;
+        }
+        return this.pricePerNight * discount;
+    }
+
 }

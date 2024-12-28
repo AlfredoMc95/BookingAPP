@@ -2,9 +2,9 @@ package com.bookingapp.models;
 
 public class Room {
     private String type;
-    private float price;
+    private Float price;
     private String description;
-    private boolean isAvailable;
+    private Boolean isAvailable;
 
     //Suite,Junior suite,Gran suite,Individuales,Dobles
 

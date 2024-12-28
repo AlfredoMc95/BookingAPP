@@ -1,8 +1,11 @@
 package com.bookingapp.models;
 
+import java.util.Comparator;
 import java.util.List;
 
-public class Hotel extends AccomodationBase {
+import static com.bookingapp.utilities.PrintMessage.printSeparator;
+
+public class Hotel extends AccommodationBase {
     private List<Room> rooms;
 
     public Hotel(String name, int rate, double pricePerNight, String city, List<Room> rooms) {
@@ -22,38 +25,30 @@ public class Hotel extends AccomodationBase {
     }
 
     @Override
-    public double totalPriceSum(int quantityOfRooms, int checkIn){
-        Room room = getLowerPriceRoom();
+    public double calculateTotalPrice(int quantityOfRooms, int checkIn){
+        Room room = findCheapestRoom();
         double totalPrice = getPricePerNight() * quantityOfRooms * room.getPrice();
         double discount = totalPriceDiscount(checkIn);
         totalPrice = totalPrice + discount;
         return totalPrice;
     }
 
-    // busaca el cuarto mas barato y que este "valido" non este en uso ...
-    public Room getLowerPriceRoom(){
-        Room cheapestRoom = null;
-        double lowestPrice = Double.MAX_VALUE;
-
-        for (Room room : rooms) {
-            if (room.isAvailable() && room.getPrice() < lowestPrice) {
-                lowestPrice = room.getPrice();
-                cheapestRoom = room;
-            }
-        }
-
-        return cheapestRoom;
+    public Room findCheapestRoom(){
+        return rooms.stream()
+                .filter(Room::isAvailable)
+                .min(Comparator.comparingDouble(Room::getPrice))
+                .orElse(null);
     }
 
-    public void showRooms() {
+    public void displayAvailableRooms() {
         long availableRooms = rooms.stream().filter(Room::isAvailable).count();
-        System.out.println("curtos disponibles: " + availableRooms);
+        System.out.println("cuartos disponibles: " + availableRooms);
         for (Room room: rooms){
             if(room.isAvailable()){
-                System.out.println("- typo: "+ room.getType() +". - descirpcion: "+room.getDescription()+". - Precio base: "+room.getPrice());
+                System.out.println("- typo: "+ room.getType() +". - descripción: "+room.getDescription()+". - Precio base: "+room.getPrice());
             }
         }
-        System.out.println("------------------------");
+        printSeparator();
     }
 
 }

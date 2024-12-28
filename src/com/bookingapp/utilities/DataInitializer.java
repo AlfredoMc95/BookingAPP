@@ -5,7 +5,7 @@ import java.util.List;
 import com.bookingapp.models.*;
 
 public class DataInitializer {
-    public static List<AccomodationBase> initializeAccommodations() {
+    public static List<AccommodationBase> initializeAccommodations() {
         // Crear habitaciones para el primer hotel
         List<Room> hotelSolRooms = new ArrayList<>();
         hotelSolRooms.add(new Room("Suite", 300, "Amplia habitación con sala de estar, jacuzzi y vista panorámica", true));
@@ -21,35 +21,29 @@ public class DataInitializer {
         hotelLunaRooms.add(new Room("Individual", 100, "Habitación acogedora para una persona, incluye escritorio y TV", true));
         hotelLunaRooms.add(new Room("Gran Suite", 450, "Suite exclusiva con vistas espectaculares, cocina privada y baño de lujo", true));
 
-        // Crear hoteles
-        Hotel hotelSol = new Hotel("Hotel Sol", 4, 200, "Medellín", hotelSolRooms);
-        Hotel hotelLuna = new Hotel("Hotel Luna", 5, 250, "Medellín", hotelLunaRooms);
-
-        // Crear apartamentos
-        Aparment mazuren = new Aparment("Mazuren", 2, "Bogota", 250);
-
-        // Crear lista de alojamientos
-        List<AccomodationBase> accommodations = new ArrayList<>();
-        accommodations.add(hotelSol);
-        accommodations.add(hotelLuna);
-        accommodations.add(mazuren);
-
-        return accommodations;
-    }
-
-    public static List<DayOfSun> initializeDayOfSun() {
         // Crear actividades
         List<Activity> activities = new ArrayList<>();
         activities.add(new Activity("Natación", "Disfruta de una piscina olímpica"));
         activities.add(new Activity("Senderismo", "Explora senderos naturales"));
 
+        // Crear hoteles
+        Hotel hotelSol = new Hotel("Hotel Sol", 4, 200, "Medellín", hotelSolRooms);
+        Hotel hotelLuna = new Hotel("Hotel Luna", 5, 250, "Medellín", hotelLunaRooms);
+
+        // Crear apartamentos
+        Apartment mazuren = new Apartment("Mazuren", 2, "Bogota", 250);
+
         // Crear Day of Sun
-        DayOfSun dayOfSun = new DayOfSun("Parque Sol", 50, activities, "Medellín", true);
+        DayOfSun dayOfSun = new DayOfSun("Parque Sol",5, "Medellín",50,activities,true);
 
-        // Crear lista de opciones Day of Sun
-        List<DayOfSun> dayOfSunOptions = new ArrayList<>();
-        dayOfSunOptions.add(dayOfSun);
 
-        return dayOfSunOptions;
+        // Crear lista de alojamientos
+        List<AccommodationBase> accommodations = new ArrayList<>();
+        accommodations.add(hotelSol);
+        accommodations.add(hotelLuna);
+        accommodations.add(mazuren);
+        accommodations.add(dayOfSun);
+
+        return accommodations;
     }
 }

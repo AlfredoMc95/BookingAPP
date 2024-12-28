@@ -3,7 +3,7 @@ package com.bookingapp.models;
 public class BookingTicket {
     private User user;
     private Room room;
-    private double totalPrice;
+    private Double totalPrice;
 
     public BookingTicket(User user, Room room, double totalPrice) {
         this.user = user;
