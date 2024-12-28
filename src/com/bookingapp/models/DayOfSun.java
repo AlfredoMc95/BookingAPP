@@ -5,39 +5,19 @@ import com.bookingapp.utilities.IActivity;
 
 import java.util.List;
 
-public class DayOfSun implements IAccommodation, IActivity {
-    private String name;
-    private double price;
+public class DayOfSun extends AccommodationBase implements IAccommodation, IActivity {
     private List<Activity> activities;
-    private String city;
-    private boolean lunchIsInclude;
+    private Boolean lunchIsInclude;
 
-    public DayOfSun(String name, double price, List<Activity> activities, String city, boolean lunchIsInclude) {
-        this.name = name;
-        this.price = price;
+    public DayOfSun(String name, Integer rate, String city, double pricePerNight, List<Activity> activities, Boolean lunchIsInclude) {
+        super(name, rate, city, pricePerNight);
         this.activities = activities;
-        this.city = city;
         this.lunchIsInclude = lunchIsInclude;
     }
 
     public DayOfSun() {
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
 
     public List<Activity> getActivities() {
         return activities;
@@ -53,19 +33,6 @@ public class DayOfSun implements IAccommodation, IActivity {
 
     public void setLunchIsInclude(boolean lunchIsInclude) {
         this.lunchIsInclude = lunchIsInclude;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    @Override
-    public double totalPriceSum(int roomsQuantity, int checkIn) {
-        return price;
     }
 
     @Override
