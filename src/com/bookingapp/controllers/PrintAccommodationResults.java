@@ -5,6 +5,7 @@ import com.bookingapp.models.Apartment;
 import com.bookingapp.models.DayOfSun;
 import com.bookingapp.models.Hotel;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static com.bookingapp.controllers.Booking.findAccommodations;
@@ -15,7 +16,7 @@ import static com.bookingapp.views.printDayOfSunDetails.printDayOfSunDetails;
 
 public class PrintAccommodationResults {
 
-    public static void printResults(String city, String type, int checkIn, int checkOut, int adults, int children, int rooms) {
+    public static void printResults(String city, String type, LocalDate checkIn, LocalDate checkOut, int adults, int children, int rooms) {
         List<AccommodationBase> results = findAccommodations(city, type, checkIn, checkOut, adults, children, rooms);
 
         if (results.isEmpty()) {

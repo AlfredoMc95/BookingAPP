@@ -2,11 +2,13 @@ package com.bookingapp.views;
 
 import com.bookingapp.models.Hotel;
 
+import java.time.LocalDate;
+
 import static com.bookingapp.utilities.PrintMessage.printSeparator;
 import static com.bookingapp.utilities.PrintMessage.printStrigMessage;
 
 public class PrintHotelDetails {
-    public static void printHotelDetails(Hotel hotel, int rooms, int checkIn) {
+    public static void printHotelDetails(Hotel hotel, int rooms, LocalDate checkIn) {
         double totalPrice = hotel.calculateTotalPrice(rooms, checkIn);
         double discount = hotel.totalPriceDiscount(checkIn);
         printStrigMessage("Nombre: " + hotel.getName());
