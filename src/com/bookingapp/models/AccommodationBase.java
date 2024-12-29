@@ -1,6 +1,8 @@
 package com.bookingapp.models;
 
 import com.bookingapp.utilities.IAccommodation;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,33 +64,40 @@ public class AccommodationBase implements IAccommodation {
         this.bookingTicket.add(bookingTicket);
     }
 
-    public double calculateTotalPrice(int quantityOfRooms, int checkIn){
+    public double calculateTotalPrice(int quantityOfRooms, LocalDate checkIn){
         double totalPrice = this.pricePerNight * quantityOfRooms;
         double discount = totalPriceDiscount(checkIn);
         totalPrice = totalPrice + discount;
         return totalPrice;
     }
 
-    /*
-    public double totalPriceDiscount(int checkIn) {
-        double discount = 0;
-        if (checkIn >= 25) discount = 0.15;
-        else if (checkIn >= 10) discount = 0.10;
-        else if (checkIn >= 5) discount = -0.08;
+    public double totalPriceDiscount(LocalDate checkIn) {
+        int checkInDay = checkIn.getDayOfMonth();
+
+        double discount = calculateDiscount(checkInDay);
 
         return this.pricePerNight * discount;
     }
-    */
 
-    public double totalPriceDiscount(int checkIn) {
-        double discount;
-        switch (checkIn) {
-            case 25, 26, 27, 28, 29, 30 -> discount = 0.15;
-            case 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 -> discount = 0.10;
-            case 5, 6, 7, 8, 9 -> discount = -0.08;
-            default -> discount = 0;
+    private double calculateDiscount(int checkInDay) {
+        if (isEndOfMonth(checkInDay, checkInDay)) {
+            return 0.15;
         }
-        return this.pricePerNight * discount;
+        if (isWithinRange(checkInDay, 10, 15)) {
+            return 0.10;
+        }
+        if (isWithinRange(checkInDay, 5, 9)) {
+            return -0.08;
+        }
+        return 0;
+    }
+
+    private boolean isEndOfMonth(int checkInDay, int lengthOfMonth) {
+        return checkInDay > (lengthOfMonth - 5);
+    }
+
+    private boolean isWithinRange(int checkInDay, int start, int end) {
+        return checkInDay >= start && checkInDay <= end;
     }
 
 }

@@ -1,6 +1,8 @@
 package com.bookingapp.views;
 
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import com.bookingapp.controllers.Booking;
 
@@ -14,15 +16,19 @@ public class HotelShowRoomsData {
         printStrigMessage("Ingrese nombre del hotel:");
         String hotelName = scanner.nextLine();
         printStrigMessage("Ingrese dia de inicio:");
-        int checkIn = scanner.nextInt();
+        String checkInDate = scanner.nextLine();
         printStrigMessage("Ingrese dia de fin:");
-        int checkOut = scanner.nextInt();
+        String checkOutDate = scanner.nextLine();
         printStrigMessage("Ingrese adultos:");
         int adults = scanner.nextInt();
         printStrigMessage("Ingrese niños:");
         int children = scanner.nextInt();
         printStrigMessage("Ingrese habitaciones:");
         int rooms = scanner.nextInt();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate checkIn = LocalDate.parse(checkInDate, formatter);
+        LocalDate checkOut = LocalDate.parse(checkOutDate, formatter);
 
         Booking.showRooms(hotelName,checkIn,checkOut,adults,children,rooms);
     }

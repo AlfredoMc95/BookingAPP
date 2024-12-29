@@ -1,5 +1,6 @@
 package com.bookingapp.models;
 
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class Hotel extends AccommodationBase {
     }
 
     @Override
-    public double calculateTotalPrice(int quantityOfRooms, int checkIn){
+    public double calculateTotalPrice(int quantityOfRooms, LocalDate checkIn){
         Room room = findCheapestRoom();
         double totalPrice = getPricePerNight() * quantityOfRooms * room.getPrice();
         double discount = totalPriceDiscount(checkIn);

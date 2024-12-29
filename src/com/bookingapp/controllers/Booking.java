@@ -1,5 +1,7 @@
 package com.bookingapp.controllers;
 import com.bookingapp.models.*;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import static com.bookingapp.utilities.PrintMessage.*;
@@ -7,7 +9,7 @@ import static com.bookingapp.utilities.PrintMessage.*;
 public class Booking {
     public static List<AccommodationBase> accommodations = new ArrayList<>();
 
-    public static List<AccommodationBase> findAccommodations(String city, String type, int checkIn, int checkOut, int adults, int children, int rooms) {
+    public static List<AccommodationBase> findAccommodations(String city, String type, LocalDate checkIn, LocalDate checkOut, int adults, int children, int rooms) {
         return accommodations.stream()
                 .filter(accommodation -> accommodation.getCity().equalsIgnoreCase(city))
                 .filter(accommodation -> matchesTypeAndAvailability(accommodation, type, rooms))
@@ -51,7 +53,7 @@ public class Booking {
         return getAvailableRooms(hotel).size() >= requiredRooms;
     }
 
-    public static void showRooms(String hotelName, int checkIn, int checkOut, int adults, int children, int rooms){
+    public static void showRooms(String hotelName, LocalDate checkIn, LocalDate checkOut, int adults, int children, int rooms){
         List<Object> results = findAccommodationsByName(hotelName, rooms);
         if (results.isEmpty()) {
             printNotFound();

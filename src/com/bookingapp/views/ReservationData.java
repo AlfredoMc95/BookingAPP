@@ -3,6 +3,8 @@ package com.bookingapp.views;
 import com.bookingapp.controllers.Booking;
 import com.bookingapp.models.User;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import static com.bookingapp.controllers.MakeReservation.makeReservation;
@@ -16,9 +18,9 @@ public class ReservationData {
         printStrigMessage("Ingrese nombre del hotel:");
         String hotelName = scanner.nextLine();
         printStrigMessage("Ingrese dia de inicio:");
-        int checkIn = scanner.nextInt();
+        String checkInDate = scanner.nextLine();
         printStrigMessage("Ingrese dia de fin:");
-        int checkOut = scanner.nextInt();
+        String checkOutDate = scanner.nextLine();
         printStrigMessage("Ingrese adultos:");
         int adults = scanner.nextInt();
         printStrigMessage("Ingrese niños:");
@@ -26,6 +28,10 @@ public class ReservationData {
         printStrigMessage("Ingrese habitaciones:");
         int rooms = scanner.nextInt();
         scanner.nextLine();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate checkIn = LocalDate.parse(checkInDate, formatter);
+        LocalDate checkOut = LocalDate.parse(checkOutDate, formatter);
 
         if(user == null) {
 

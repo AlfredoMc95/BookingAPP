@@ -5,6 +5,7 @@ import com.bookingapp.models.Hotel;
 import com.bookingapp.models.Room;
 import com.bookingapp.models.User;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static com.bookingapp.controllers.Booking.findAccommodationsByName;
@@ -12,7 +13,7 @@ import static com.bookingapp.utilities.PrintMessage.*;
 import static com.bookingapp.views.PrintConfirmReservation.printConfirmReservation;
 
 public class MakeReservation {
-    public static void makeReservation(String hotelName, int checkIn, int checkOut, int adults, int children, int rooms, User userInfo){
+    public static void makeReservation(String hotelName, LocalDate checkIn, LocalDate checkOut, int adults, int children, int rooms, User userInfo){
         List<Object> results = findAccommodationsByName(hotelName, rooms);
 
         if (results.isEmpty()) {
@@ -27,7 +28,7 @@ public class MakeReservation {
         }
     }
 
-    private static void processHotelReservation(Hotel hotel, int checkIn, int rooms, User userInfo) {
+    private static void processHotelReservation(Hotel hotel, LocalDate checkIn, int rooms, User userInfo) {
         double totalPrice = hotel.calculateTotalPrice(rooms, checkIn);
         Room cheapestRoom = hotel.findCheapestRoom();
 

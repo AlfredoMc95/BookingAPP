@@ -3,6 +3,7 @@ package com.bookingapp.models;
 import com.bookingapp.utilities.IAccommodation;
 import com.bookingapp.utilities.IActivity;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class DayOfSun extends AccommodationBase implements IAccommodation, IActivity {
@@ -40,5 +41,10 @@ public class DayOfSun extends AccommodationBase implements IAccommodation, IActi
         for (Activity activity: activities){
             System.out.println("- "+ activity.getName() +":"+activity.getDescription());
         }
+    }
+
+    @Override
+    public double calculateTotalPrice(int roomsQuantity, LocalDate checkIn) {
+        return 0;
     }
 }
