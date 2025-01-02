@@ -1,20 +1,17 @@
 package com.bookingapp.controllers;
 
-import com.bookingapp.models.BookingTicket;
-import com.bookingapp.models.Hotel;
-import com.bookingapp.models.Room;
-import com.bookingapp.models.User;
+import com.bookingapp.models.*;
 
 import java.time.LocalDate;
 import java.util.List;
 
-import static com.bookingapp.controllers.Booking.findAccommodationsByName;
+import static com.bookingapp.utilities.BookingMediator.findAccommodationsByName;
 import static com.bookingapp.utilities.PrintMessage.*;
 import static com.bookingapp.views.PrintConfirmReservation.printConfirmReservation;
 
 public class MakeReservation {
     public static void makeReservation(String hotelName, LocalDate checkIn, LocalDate checkOut, int adults, int children, int rooms, User userInfo){
-        List<Object> results = findAccommodationsByName(hotelName, rooms);
+        List<AccommodationBase> results = findAccommodationsByName(hotelName, rooms);
 
         if (results.isEmpty()) {
             printNotFound();

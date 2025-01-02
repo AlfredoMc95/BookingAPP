@@ -18,7 +18,7 @@ public class UpdateHotel {
         }
 
         printStrigMessage("Eliminando reserva actual...");
-        hotelWithBooking.getBookingTicket().remove(ticketToUpdate);
+        hotelWithBooking.getBookingTickets().remove(ticketToUpdate);
 
         Room room = ticketToUpdate.getRoom();
         if (room != null) {

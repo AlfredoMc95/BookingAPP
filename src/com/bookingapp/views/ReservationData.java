@@ -1,6 +1,5 @@
 package com.bookingapp.views;
 
-import com.bookingapp.controllers.Booking;
 import com.bookingapp.models.User;
 
 import java.time.LocalDate;

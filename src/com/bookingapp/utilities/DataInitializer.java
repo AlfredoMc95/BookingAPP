@@ -2,7 +2,9 @@ package com.bookingapp.utilities;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import com.bookingapp.models.*;
+
 
 public class DataInitializer {
     public static List<AccommodationBase> initializeAccommodations() {
@@ -26,24 +28,38 @@ public class DataInitializer {
         activities.add(new Activity("Natación", "Disfruta de una piscina olímpica"));
         activities.add(new Activity("Senderismo", "Explora senderos naturales"));
 
-        // Crear hoteles
-        Hotel hotelSol = new Hotel("Hotel Sol", 4, 200, "Medellín", hotelSolRooms);
-        Hotel hotelLuna = new Hotel("Hotel Luna", 5, 250, "Medellín", hotelLunaRooms);
+        AccommodationBase hotelSol = AccommodationFactory.getHotel("Hotel Sol", 4, 200, "Medellín", hotelSolRooms);
+        AccommodationBase hotelSol1 = AccommodationFactory.getHotel("Hotel Sol", 4, 200, "Bogota", hotelLunaRooms);
+        AccommodationBase hotelLuna = AccommodationFactory.getHotel("Hotel Luna", 5, 250, "Medellín", hotelLunaRooms);
+        AccommodationBase mazuren = AccommodationFactory.getApartment("Mazuren", 2, "Bogota", 250);
+        AccommodationBase dayOfSun = AccommodationFactory.getDayOfSun("Parque Sol", 5, "Medellín", 50, activities, true);
 
-        // Crear apartamentos
-        Apartment mazuren = new Apartment("Mazuren", 2, "Bogota", 250);
-
-        // Crear Day of Sun
-        DayOfSun dayOfSun = new DayOfSun("Parque Sol",5, "Medellín",50,activities,true);
 
 
         // Crear lista de alojamientos
         List<AccommodationBase> accommodations = new ArrayList<>();
         accommodations.add(hotelSol);
+        accommodations.add(hotelSol1);
         accommodations.add(hotelLuna);
         accommodations.add(mazuren);
         accommodations.add(dayOfSun);
 
+        System.out.println(accommodations);
+        System.out.println(hotelSol == hotelSol1);
+
+        /*
+        JFrame frame = new JFrame("Hotel Map");
+        frame.setSize(800, 600);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        HotelMapPanel mapPanel = new HotelMapPanel();
+
+        mapPanel.addHotel(hotelSol, 400, 100);
+        mapPanel.addHotel(hotelSol1, 200, 400);
+
+        frame.add(mapPanel);
+        frame.setVisible(true);
+        */
         return accommodations;
     }
 }
