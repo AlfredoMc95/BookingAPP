@@ -1,11 +1,12 @@
 package com.bookingapp.views;
-import java.util.Scanner;
-import com.bookingapp.controllers.Booking;
+import com.bookingapp.utilities.BookingMediator;
 
-import static com.bookingapp.controllers.UpdateBooking.updateBooking;
+import java.util.Scanner;
+
 import static com.bookingapp.utilities.PrintMessage.printStrigMessage;
 
 public class UpdateBookingData {
+    private static final BookingMediator mediator = BookingMediator.getInstance();
     // 4
     public static void updateBookingData()
     {
@@ -18,6 +19,6 @@ public class UpdateBookingData {
         printStrigMessage("Ingrese fecha de nacimiento:");
         birthdate = scanner.nextLine();
 
-        updateBooking( email, birthdate);
+        mediator.updateBooking( email, birthdate);
     }
 }

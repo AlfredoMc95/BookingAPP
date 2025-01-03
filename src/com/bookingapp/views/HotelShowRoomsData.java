@@ -4,11 +4,15 @@ package com.bookingapp.views;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
-import com.bookingapp.controllers.Booking;
+
+import com.bookingapp.utilities.BookingMediator;
+import com.bookingapp.utilities.Mediator;
 
 import static com.bookingapp.utilities.PrintMessage.printStrigMessage;
 
 public class HotelShowRoomsData {
+    private static final Mediator mediator = BookingMediator.getInstance();
+
     //2.
     public static void hotelShowRoomsData() {
         Scanner scanner = new Scanner(System.in);
@@ -30,7 +34,7 @@ public class HotelShowRoomsData {
         LocalDate checkIn = LocalDate.parse(checkInDate, formatter);
         LocalDate checkOut = LocalDate.parse(checkOutDate, formatter);
 
-        Booking.showRooms(hotelName,checkIn,checkOut,adults,children,rooms);
+        mediator.showRooms(hotelName,checkIn,checkOut,adults,children,rooms);
     }
 
 

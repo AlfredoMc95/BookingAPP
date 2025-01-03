@@ -2,7 +2,6 @@ package com.bookingapp.views;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
-import com.bookingapp.controllers.Booking;
 
 import static com.bookingapp.controllers.PrintAccommodationResults.printResults;
 import static com.bookingapp.utilities.PrintMessage.printStrigMessage;

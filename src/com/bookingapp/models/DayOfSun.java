@@ -4,7 +4,10 @@ import com.bookingapp.utilities.IAccommodation;
 import com.bookingapp.utilities.IActivity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+
+import static com.bookingapp.utilities.PrintMessage.printStrigMessage;
 
 public class DayOfSun extends AccommodationBase implements IAccommodation, IActivity {
     private List<Activity> activities;
@@ -18,7 +21,6 @@ public class DayOfSun extends AccommodationBase implements IAccommodation, IActi
 
     public DayOfSun() {
     }
-
 
     public List<Activity> getActivities() {
         return activities;
@@ -38,13 +40,14 @@ public class DayOfSun extends AccommodationBase implements IAccommodation, IActi
 
     @Override
     public void showActivity() {
-        for (Activity activity: activities){
-            System.out.println("- "+ activity.getName() +":"+activity.getDescription());
+        for (Activity activity : activities) {
+            printStrigMessage("- " + activity.getName() + ": " + activity.getDescription());
         }
     }
 
     @Override
     public double calculateTotalPrice(int roomsQuantity, LocalDate checkIn) {
-        return 0;
+        return getPricePerNight() * roomsQuantity;
     }
 }
+
